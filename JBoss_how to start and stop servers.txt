@@ -1,0 +1,22 @@
+scd /apps/jboss/jboss-as-7.1.1.Final/bin (Note: needs to be done from JBoss Primary node)
+./jbossclis.sh --connect
+
+To start and stop single server instance:(Note: needs to be done from JBoss Primary node)
+./jbossclis.sh --connect
+/host=t01dra2203/server-config=Tier2.Member1:stop
+/host=t01dra2203/server-config=Tier2.Member1:start
+jboss-admin.sh -c command=/host=master:shutdown
+
+
+To start and stop server cluster:(Note: needs to be done from JBoss Primary node)
+./jbossclis.sh --connect
+/server-group=Tier2.Cluster:stop-servers
+/server-group=Tier2.Cluster:start-servers
+
+how to deploy application:(Note: needs to be done from JBoss Primary node)
+./jbossclis.sh --connect
+[domain@localhost:9999 /] deploy /path/to/test-application.ear --allserver-groups
+
+./jbossclis.sh --connect (Note: needs to be done from JBoss Primary node)
+alternatively you can deploy application tp specific server group
+[domain@localhost:9999 /] deploy /path/to/test-application.war --server-groups=server_group_1,server_group_2
